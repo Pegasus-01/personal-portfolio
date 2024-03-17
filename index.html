@@ -16,14 +16,20 @@
         <div class="container">
             <nav>
                 <ul>
-                    <li><a href="images/Rudranil_Maity_resume.pdf" download class="btn btn2">Download CV</a></li>
+                    <li>
+                        <a 
+                        onclick="window.open('./images/Rudranil_Maity_resume.pdf')" 
+                        download class="btn btn2">
+                        Download CV
+                        </a>
+                    </li>
                     <i class="fas fa-times"></i>
                 </ul>
                 <i class="fas fa-bars"></i>
             </nav>
             <div class="header-text">
-                <p>Cybersecurity Analyst</p>
-                <h1>Hi, I'm <span>Rudranil</span><br>Maity from Harrison, NJ</h1>
+                <h1>Hi, I'm <span>Rudranil</span></h1>
+                <h2><span>Cybersecurity</span> Analyst<br>From Harrison, New Jersey</h2>
             </div>
         </div>
     </div>
@@ -31,10 +37,10 @@
     <div id="about">
         <div class="container">
             <div class="row">
-                <div class="about-col-1">
-                    <img src="images/user.png">
-                    <img src="https://tryhackme-badges.s3.amazonaws.com/pegasus01.png" alt="TryHackMe">
-                </div>
+            <div class="about-col-1">
+                <img src="images/user.png">
+                <img src="https://tryhackme-badges.s3.amazonaws.com/pegasus01.png" alt="TryHackMe">
+            </div>
                 <div class="about-col-2">
                     <h1 class="sub-title">About Me</h1>
                     <p>I am Rudranil Maity, a Cyber Security and Privacy enthusiast pursuing a Master's at NJIT with a B.Tech in Computer Science from Netaji Subhash Engineering College. 
@@ -80,32 +86,38 @@
             <h1 class="sub-title">Project Highlights</h1>
             <div class="work-list">
                 <div class="work">
-                    <img src="images/patent_fs.png" alt="">
+                    <img src="images/nw_analysis.png" alt="">
                     <div class="layer">
-                        <h2>Patent: Light Fidelity (LIFI) Based Data Transfer Device For Mobile Phone</h2>
-                        <h4>Role: Core Application Developer</h4>
-                        <p>• Developed the first-ever android application for Light Fidelity-based encrypted data transfer over void medium.</p>
-                        <p>• Achieved over 100 times increment in speed of secured transfer with Li-Fi over the conventional methods.</p>
-                        <p>• Leveraged reactNative, using intensity-controlled flashlight as a source and infrared sensor as a receptor.</p>
-                        <p>• Design no: 363174-001; CBR: 200974 and class 14-02. Published in the Journal of Intellectual Properties India.</p>
+                        <h2>Network Traffic Analysis of Android apps using MITMproxy and Frida</h2>
+                        <p>Identified security vulnerabilities in Android apps, exposing unchecked transmission 
+                            of personal and sensitive data to advertising and analytics servers, potentially 
+                            leading to severe fraud risks. Have a read to the comprehensive report!!<br>
+                            <a style="background-color: #ff004f;" href="https://medium.com/@rudranilmaity01/network-traffic-analysis-of-android-apps-using-mitmproxy-and-frida-afb69afc389f">
+                                <u>@Medium</u>
+                            </a></p>
                     </div>
                 </div>
                 <div class="work">
                     <img src="images/bo_img.jpg" alt="">
                     <div class="layer">
-                        <h2>Buffer Overflow on Various Programs</h2>
-                        <p>• Exploited multiple vulnerabilities to bypass the canary value through buffer overflow by using penetration testing techniques on the disassembly of a x86 assembly program in GDB.</p>
-                        <p>• Analyzed ways to get secured from those vulnerabilities by recommending use of ASLR, DEP and Stack Smashing protection on Linux Distributions; as well as implementing SIEM and IDS.</p>
+                        <h2>Buffer Overflow Attacks Over Various Programs based on x86 Architecture</h2>
+                        <p>Developed exploits to achieve arbitrary code execution by circumventing modern defenses 
+                            like ASLR, DEP, and stack canaries, employing techniques such as buffer overflow and 
+                            ROP chains, with in-depth analysis using tools like GDB across various Linux distributions. <br>
+                            <a style="background-color: #ff004f;" href="https://github.com/Pegasus-01/Buffer-Overflow">
+                            <u>@GitHub</u></a>
+                        </p>
                     </div>
                 </div>
                 <div class="work">
                     <img src="images/ec_fs.png" alt="">
                     <div class="layer">
-                        <h2>TALENT ARCHIVES</h2>
-                        <h2>(A freelancing website for artists)</h2>
-                        <h4>Role: Team Leader</h4>
-                        <p>• Led a team of four individuals in developing a full-stack (ReactJS, NodeJS and MongoDB), e-commerce platform tailored towards artists as part of a final-year group project at Netaji Subhash Engineering College.</p>
-                        <p>• Undertook SDLC and CI/CD Pipelines concept for timely completion and spearheaded presentation by leveraging the project’s functionalities through ER Diagrams and DFDs.</p>
+                        <h2>Extensive Penetration Testing of Web Applications</h2>
+                        <p>
+                            Developed JavaScript exploits to exploit XSS vulnerabilities for stealing user credentials 
+                            and cookies, employing request forgery and same-origin policy bypass techniques. Conducted 
+                            vulnerability analysis through simulated Certificate Authority actions, reverse 
+                            engineering authentication schemes, and analyzing HTTP request formats via network traffic inspection.</p>
                     </div>
                 </div>
             </div>
@@ -118,8 +130,19 @@
             <div class="row">
                 <div class="contact-left">
                     <h1 class="sub-title">Contact Me</h1>
-                    <p><i class="fas fa-paper-plane"></i> rudranilmaity01@gmail.com</p>
-                    <p><i class="fas fa-paper-plane"></i> rm964@njit.edu</p>
+                    <p>
+                        <i class="fas fa-paper-plane"></i> 
+                        <a style="text-decoration: none; color: white;" href="mailto:rudranilmaity01@gmail.com">
+                            rudranilmaity01@gmail.com
+                        </a>
+                    </p>
+                    <p>
+                        <i class="fas fa-paper-plane"></i> 
+                        <a style="text-decoration: none; color: white;" href="mailto:rm964@njit.edu">
+                            rm964@njit.edu
+                        </a>
+                    </p>
+                
                     <p><i class="fas fa-phone-square-alt"></i> +1 (973)-964-8869</p>
                     <div class="social-icons">
                         <a href="https://www.linkedin.com/in/rudranil-maity-006ab5167/"><i class="fab fa-linkedin"></i></a>

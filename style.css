@@ -82,6 +82,10 @@ nav ul li a:hover::after {
     color: #ff004f;
 }
 
+.header-text h2 span {
+    color: #ff004f;
+}
+
 /* ----------ABOUT---------- */
 #about {
     padding: 80px 0px;
@@ -247,9 +251,9 @@ width: 100%;
     justify-content: center;
     flex-direction: column;
     padding: 0 40px;
-    text-align: center;
+    text-align: left;
     font-size: 16px;
-    transition: height 0.5s;
+    transition: height 0.4s;
 }
 
 .layer h2 {
@@ -266,7 +270,7 @@ width: 100%;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    text-align: center;
+    text-align:justify;
 }
 
 .work:hover img {
