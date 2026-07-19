@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rudranil Maity — Security Engineer</title>
+<meta name="description" content="Rudranil Maity — Security engineer operating identity, endpoint, cloud & SaaS security. Entra ID, DLP, SIEM/SOAR, GenAI security.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0F1A;
+  --bg2:#0C1220;
+  --panel:#0F1626;
+  --panel2:#121B2E;
+  --line:#1C2940;
+  --line2:#27395C;
+  --text:#C7D3E4;
+  --bright:#EDF3FB;
+  --dim:#7286A0;
+  --faint:#4A5B75;
+  --amber:#FFB224;
+  --amber-dim:rgba(255,178,36,.12);
+  --blue:#5AA7FF;
+  --blue-dim:rgba(90,167,255,.10);
+  --red:#FF5C63;
+  --red-dim:rgba(255,92,99,.10);
+  --green:#34D399;
+  --green-dim:rgba(52,211,153,.10);
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --disp:'Chakra Petch',var(--sans);
+  --maxw:1080px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+/* faint ops-grid backdrop */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:radial-gradient(rgba(90,167,255,.05) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+::selection{background:var(--amber);color:#0A0F1A}
+a{color:var(--blue);text-decoration:none}
+a:hover{color:var(--bright)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+
+/* ---------- top status bar ---------- */
+.statusbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(10,15,26,.86);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.statusbar-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 24px;
+  height:56px;display:flex;align-items:center;gap:20px;
+  font-family:var(--mono);font-size:12px;
+}
+.sb-id{color:var(--bright);font-weight:600;letter-spacing:.06em;white-space:nowrap}
+.sb-id .prompt{color:var(--amber)}
+.sb-status{display:flex;align-items:center;gap:7px;color:var(--dim);white-space:nowrap}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(52,211,153,.7);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.sb-nav{margin-left:auto;display:flex;gap:2px}
+.sb-nav a{
+  color:var(--dim);padding:6px 10px;border-radius:4px;
+  letter-spacing:.04em;transition:color .15s,background .15s;
+}
+.sb-nav a:hover{color:var(--amber);background:var(--amber-dim)}
+.sb-clock{color:var(--faint);white-space:nowrap}
+@media(max-width:860px){.sb-status,.sb-clock{display:none}}
+@media(max-width:560px){
+  .sb-nav a{padding:6px 7px;font-size:11px}
+  .statusbar-inner{padding:0 14px;gap:8px}
+}
+
+/* ---------- shared section chrome ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{padding:88px 0 0}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+.sec-tag{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  color:var(--amber);background:var(--amber-dim);
+  border:1px solid rgba(255,178,36,.25);
+  padding:3px 9px;border-radius:3px;white-space:nowrap;
+}
+.sec-title{
+  font-family:var(--disp);font-weight:700;color:var(--bright);
+  font-size:clamp(24px,3.4vw,34px);letter-spacing:.01em;text-transform:uppercase;
+}
+.sec-sub{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:36px}
+.sec-sub b{color:var(--text);font-weight:500}
+
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 0}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:12px;color:var(--dim);
+  letter-spacing:.12em;margin-bottom:18px;
+}
+.hero-eyebrow .ok{color:var(--green)}
+h1{
+  font-family:var(--disp);font-weight:700;color:var(--bright);
+  font-size:clamp(38px,6vw,60px);line-height:1.04;letter-spacing:.005em;
+  text-transform:uppercase;margin-bottom:6px;
+}
+h1 .accent{color:var(--amber)}
+.hero-role{
+  font-family:var(--mono);font-size:clamp(13px,1.6vw,15px);color:var(--blue);
+  letter-spacing:.08em;margin-bottom:22px;
+}
+.hero-role .caret{display:inline-block;width:8px;background:var(--blue);animation:blink 1s steps(1) infinite;height:1em;vertical-align:-2px}
+@keyframes blink{50%{opacity:0}}
+.hero-p{max-width:52ch;color:var(--text);margin-bottom:28px}
+.hero-p b{color:var(--bright);font-weight:600}
+.hero-links{display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.03em;
+  color:var(--text);background:var(--panel);
+  border:1px solid var(--line);border-radius:5px;
+  padding:9px 14px;transition:border-color .15s,color .15s,transform .15s,background .15s;
+}
+.chip:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px);background:var(--panel2)}
+.chip svg{width:14px;height:14px;fill:currentColor;flex:none}
+.chip.primary{background:var(--amber);border-color:var(--amber);color:#0A0F1A;font-weight:600}
+.chip.primary:hover{background:#ffc14d;color:#0A0F1A;border-color:#ffc14d}
+
+/* terminal */
+.term{
+  background:#070B14;border:1px solid var(--line);border-radius:8px;
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.8),0 0 0 1px rgba(90,167,255,.04);
+  overflow:hidden;font-family:var(--mono);font-size:12.5px;line-height:1.85;
+}
+.term-bar{
+  display:flex;align-items:center;gap:8px;
+  background:var(--panel);border-bottom:1px solid var(--line);
+  padding:10px 14px;
+}
+.term-bar .b{width:10px;height:10px;border-radius:50%}
+.term-bar .b1{background:#FF5C63}.term-bar .b2{background:#FFB224}.term-bar .b3{background:#34D399}
+.term-title{margin-left:8px;color:var(--faint);font-size:11px;letter-spacing:.08em}
+.term-body{padding:18px 18px 20px;min-height:328px}
+.term-body .ln{white-space:pre-wrap;word-break:break-word}
+.t-time{color:var(--faint)}
+.t-dim{color:var(--dim)}
+.t-ok{color:var(--green)}
+.t-warn{color:var(--amber)}
+.t-crit{color:var(--red)}
+.t-info{color:var(--blue)}
+.t-txt{color:var(--text)}
+.t-bright{color:var(--bright);font-weight:600}
+.term-cursor{display:inline-block;width:8px;height:13px;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.term-grant{
+  display:inline-block;margin-top:6px;
+  color:var(--green);border:1px solid rgba(52,211,153,.4);
+  background:var(--green-dim);padding:3px 10px;border-radius:3px;
+  letter-spacing:.14em;font-weight:600;
+}
+
+/* ---------- metric tiles ---------- */
+.metrics{margin-top:72px}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.metric-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.metric-grid{grid-template-columns:1fr}}
+.metric{
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  padding:20px 20px 16px;position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s;
+}
+.metric:hover{border-color:var(--line2);transform:translateY(-3px)}
+.metric::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--mcolor,var(--blue))}
+.metric-val{
+  font-family:var(--disp);font-weight:700;font-size:clamp(28px,3.2vw,36px);
+  color:var(--bright);line-height:1.1;
+}
+.metric-val small{font-size:.55em;color:var(--dim);font-family:var(--mono);font-weight:500}
+.metric-label{font-size:13.5px;color:var(--text);margin-top:6px;font-weight:500}
+.metric-src{
+  font-family:var(--mono);font-size:10.5px;color:var(--faint);
+  margin-top:10px;letter-spacing:.04em;
+}
+.metric-src::before{content:"measured by: ";color:var(--dim)}
+
+/* ---------- experience: incident timeline ---------- */
+.timeline{position:relative;padding-left:34px}
+.timeline::before{
+  content:"";position:absolute;left:8px;top:6px;bottom:6px;width:1px;
+  background:linear-gradient(var(--line2),var(--line) 85%,transparent);
+}
+.job{position:relative;padding-bottom:56px}
+.job:last-child{padding-bottom:8px}
+.job::before{
+  content:"";position:absolute;left:-31px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--amber);
+  box-shadow:0 0 0 4px var(--bg),0 0 12px rgba(255,178,36,.35);
+}
+.job.past::before{border-color:var(--faint);box-shadow:0 0 0 4px var(--bg)}
+.job-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:2px}
+.job-title{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--bright);letter-spacing:.02em}
+.job-badge{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;padding:2px 8px;border-radius:3px;
+}
+.badge-active{color:var(--green);background:var(--green-dim);border:1px solid rgba(52,211,153,.3)}
+.badge-closed{color:var(--dim);background:rgba(114,134,160,.08);border:1px solid var(--line)}
+.job-meta{font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:16px}
+.job-meta b{color:var(--text);font-weight:500}
+.job ul{list-style:none;display:grid;gap:11px}
+.job li{
+  position:relative;padding-left:22px;font-size:15px;color:var(--text);
+}
+.job li::before{
+  content:"▸";position:absolute;left:0;top:0;
+  color:var(--amber);font-size:13px;line-height:1.9;
+}
+.job li b{color:var(--bright);font-weight:600}
+.job li .m{font-family:var(--mono);font-size:.92em;color:var(--blue)}
+
+/* ---------- projects: case files ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.cases{grid-template-columns:1fr}}
+.case{
+  display:flex;flex-direction:column;
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  padding:22px 22px 20px;transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+.case:hover{border-color:var(--line2);transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(0,0,0,.7)}
+.case-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.case-id{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.12em}
+.case-sev{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;padding:2px 8px;border-radius:3px}
+.sev-def{color:var(--blue);background:var(--blue-dim);border:1px solid rgba(90,167,255,.3)}
+.sev-rec{color:var(--amber);background:var(--amber-dim);border:1px solid rgba(255,178,36,.3)}
+.sev-off{color:var(--red);background:var(--red-dim);border:1px solid rgba(255,92,99,.3)}
+.case h3{font-family:var(--disp);font-weight:600;font-size:17.5px;color:var(--bright);line-height:1.3;margin-bottom:10px;letter-spacing:.01em}
+.case p{font-size:14px;color:var(--text);flex:1}
+.case-tools{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:16px;line-height:1.9}
+.case-link{
+  margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  color:var(--amber);display:inline-flex;align-items:center;gap:6px;
+}
+.case-link:hover{color:#ffc14d}
+.case-link::after{content:"→";transition:transform .15s}
+.case-link:hover::after{transform:translateX(3px)}
+
+/* ---------- skills: control matrix ---------- */
+.matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:760px){.matrix{grid-template-columns:1fr}}
+.ctrl{
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 22px;
+  transition:border-color .2s;
+}
+.ctrl:hover{border-color:var(--line2)}
+.ctrl-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ctrl-num{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.1em}
+.ctrl h3{font-family:var(--disp);font-weight:600;font-size:15px;color:var(--bright);letter-spacing:.04em;text-transform:uppercase}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{
+  font-family:var(--mono);font-size:11.5px;color:var(--text);
+  background:var(--bg2);border:1px solid var(--line);border-radius:4px;
+  padding:4px 9px;transition:border-color .15s,color .15s;
+}
+.tag:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ---------- education + certs ---------- */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.edu-grid{grid-template-columns:1fr}}
+.edu{
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px;
+}
+.edu h3{font-family:var(--disp);font-weight:600;font-size:17px;color:var(--bright);letter-spacing:.01em}
+.edu .deg{font-size:14.5px;color:var(--text);margin-top:4px}
+.edu .meta{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:8px}
+.cert-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cert{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:12.5px;color:var(--text);
+  background:var(--panel);border:1px solid var(--line);border-radius:5px;
+  padding:10px 15px;transition:border-color .15s,transform .15s;
+}
+a.cert:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px)}
+.cert .cdot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
+.cert.hl .cdot{background:var(--amber)}
+
+/* ---------- contact ---------- */
+.contact{padding-bottom:0}
+.contact-panel{
+  background:linear-gradient(180deg,var(--panel2),var(--panel));
+  border:1px solid var(--line2);border-radius:10px;
+  padding:clamp(30px,5vw,56px);text-align:center;position:relative;overflow:hidden;
+}
+.contact-panel::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(600px 200px at 50% 0%,rgba(255,178,36,.07),transparent 70%);
+}
+.contact-panel .sec-tag{margin-bottom:16px;display:inline-block}
+.contact-panel h2{
+  font-family:var(--disp);font-weight:700;color:var(--bright);
+  font-size:clamp(26px,4vw,40px);text-transform:uppercase;letter-spacing:.01em;
+  margin-bottom:14px;
+}
+.contact-panel p{max-width:54ch;margin:0 auto 28px;color:var(--text)}
+.contact-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;position:relative}
+
+footer{
+  margin-top:88px;border-top:1px solid var(--line);
+  padding:26px 0 34px;
+}
+.foot-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 24px;
+  display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;
+  font-family:var(--mono);font-size:11.5px;color:var(--faint);
+}
+.foot-inner a{color:var(--dim)}
+.foot-inner a:hover{color:var(--amber)}
+</style>
+</head>
+<body>
+
+<!-- ============ STATUS BAR ============ -->
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <span class="sb-id"><span class="prompt">~$</span> rudranil.maity</span>
+    <span class="sb-status"><span class="sb-dot"></span>ON&nbsp;WATCH</span>
+    <nav class="sb-nav" aria-label="Sections">
+      <a href="#experience">timeline</a>
+      <a href="#projects">case-files</a>
+      <a href="#skills">controls</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <span class="sb-clock" id="clock" aria-hidden="true">--:--:-- UTC</span>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <p class="hero-eyebrow">// VISITOR TRIAGED — <span class="ok">NO THREAT DETECTED.</span> WELCOME.</p>
+      <h1>Rudranil<br>Maity<span class="accent">_</span></h1>
+      <p class="hero-role">SECURITY ENGINEER — BLUE TEAM &amp; GRC<span class="caret"></span></p>
+      <p class="hero-p">
+        2+ years running enterprise defense across <b>identity, endpoint, cloud, and SaaS</b> —
+        Entra ID Conditional Access &amp; PIM, EDR/MDM on three OS families, full
+        vulnerability-management and GRC lifecycle against <b>PCI-DSS, HIPAA, and NIST 800-53</b>.
+        Currently building <b>GenAI/Copilot DLP programs</b> and writing the Python &amp; PowerShell
+        that makes secure-by-default scale.
+      </p>
+      <div class="hero-links">
+        <a class="chip primary" href="mailto:rudranilmaity01@gmail.com">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          open a channel
+        </a>
+        <a class="chip" href="https://github.com/Pegasus-01" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.35.78 1.05.78 2.12v3.14c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+          github
+        </a>
+        <a class="chip" href="https://www.linkedin.com/in/rudranil01/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4.4v14H.5zM8.9 8h4.2v1.9h.1c.6-1.1 2-2.3 4.2-2.3 4.5 0 5.3 3 5.3 6.8V22h-4.4v-6.6c0-1.6 0-3.6-2.2-3.6s-2.6 1.7-2.6 3.5V22H8.9z"/></svg>
+          linkedin
+        </a>
+        <a class="chip" href="https://medium.com/@rudranilmaity01" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6.8 5a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm10.1.8c1.9 0 3.4 2.8 3.4 6.2s-1.5 6.2-3.4 6.2-3.4-2.8-3.4-6.2 1.5-6.2 3.4-6.2zM22.8 6.4c.7 0 1.2 2.5 1.2 5.6s-.5 5.6-1.2 5.6-1.2-2.5-1.2-5.6.5-5.6 1.2-5.6z"/></svg>
+          medium
+        </a>
+        <a class="chip" href="https://tryhackme.com/p/p3ga5u5" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5.2 3.8 10 9 11 5.2-1 9-5.8 9-11V6l-9-4zm0 4.5 5 2.2V12c0 3.4-2.3 6.6-5 7.6-2.7-1-5-4.2-5-7.6V8.7l5-2.2z"/></svg>
+          tryhackme
+        </a>
+      </div>
+    </div>
+
+    <!-- signature: visitor triage console -->
+    <div class="term" role="img" aria-label="Animated security console showing a visitor triage sequence that ends in access granted.">
+      <div class="term-bar">
+        <span class="b b1"></span><span class="b b2"></span><span class="b b3"></span>
+        <span class="term-title">soc://triage — session 0x7F3A</span>
+      </div>
+      <div class="term-body" id="termBody"></div>
+    </div>
+  </div>
+
+  <!-- metric tiles -->
+  <div class="metrics">
+    <div class="metric-grid">
+      <div class="metric rv" style="--mcolor:var(--green)">
+        <div class="metric-val">&lt;2<small>h</small></div>
+        <div class="metric-label">Mean time to respond, sustained daily</div>
+        <div class="metric-src">SOC3 audit results</div>
+      </div>
+      <div class="metric rv" style="--mcolor:var(--amber)">
+        <div class="metric-val">50<small>%+</small></div>
+        <div class="metric-label">MXDR alert volume cut via custom M365→Copilot connectors</div>
+        <div class="metric-src">weekly alert-fatigue reports</div>
+      </div>
+      <div class="metric rv" style="--mcolor:var(--red)">
+        <div class="metric-val">15→4.9<small>%</small></div>
+        <div class="metric-label">Phish-prone rate drop across 800+ employees in 3 months</div>
+        <div class="metric-src">KnowBe4 simulations</div>
+      </div>
+      <div class="metric rv" style="--mcolor:var(--blue)">
+        <div class="metric-val">1,000<small>+</small></div>
+        <div class="metric-label">Identities hardened under Zero Trust, CA &amp; PIM governance</div>
+        <div class="metric-src">lateral-movement reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience" class="wrap">
+  <div class="sec-head rv">
+    <span class="sec-tag">LOG 01</span>
+    <h2 class="sec-title">Incident Timeline</h2>
+  </div>
+  <p class="sec-sub rv">chronological record — every entry <b>measured</b>, not claimed</p>
+
+  <div class="timeline">
+    <article class="job rv">
+      <div class="job-head">
+        <h3 class="job-title">IT Security Analyst</h3>
+        <span class="job-badge badge-active">ACTIVE</span>
+      </div>
+      <p class="job-meta"><b>The Breakers Palm Beach</b> · Palm Beach, FL · Apr 2025 — Present</p>
+      <ul>
+        <li>Sustained <b>sub-2-hour MTTR</b> and full <b>PCI-DSS compliance</b> <span class="m">[SOC3-verified]</span> — triaging daily SIEM/SOAR alerts across email gateway, EDR, and network monitoring with full log &amp; packet investigations.</li>
+        <li>Led DLP strategy across <b>Microsoft 365, SharePoint, OneDrive &amp; Smartsheet</b> — layering Purview DLP, Zscaler CASB, and <b>GenAI/Copilot inline prompt inspection</b> over 150+ classifiers protecting PII, PHI &amp; proprietary data.</li>
+        <li>Cut MXDR alert volume by <b>50%+</b> by engineering custom M365→Copilot connectors that killed recurring Kerberos <span class="m">klist</span>-purge false positives at the source.</li>
+        <li>Hardened identity &amp; device posture for <b>1,000+ users</b> — Zero Trust via Entra ID Conditional Access, PIM governance, and application whitelisting.</li>
+        <li>Kept posture consistent across remote, on-prem &amp; cloud by correlating <b>FortiGate ACLs</b> with <b>Zscaler CASB / web-gateway</b> policy.</li>
+        <li>Shrunk the vulnerability backlog <b>30%</b> <span class="m">[Nessus/Tenable trend data]</span> by automating patch &amp; reporting workflows in Python and PowerShell.</li>
+        <li>Drove phish-prone rate from <b>15% → 4.9%</b> in 3 months by onboarding KnowBe4 and running targeted awareness training for 800+ employees.</li>
+      </ul>
+    </article>
+
+    <article class="job past rv">
+      <div class="job-head">
+        <h3 class="job-title">Information Security Analyst</h3>
+        <span class="job-badge badge-closed">RESOLVED</span>
+      </div>
+      <p class="job-meta"><b>Rebecca Everlene Trust Company</b> · Chicago, IL (Remote) · Aug 2024 — Apr 2025</p>
+      <ul>
+        <li>Surfaced critical production vulnerabilities via <b>OSINT-driven pentests</b> combined with SAST &amp; DAST — findings validated in remediation review.</li>
+        <li>Backed clean <b>HIPAA audit outcomes</b> by standing up NIST/OWASP-aligned incident-response plans and risk frameworks across twelve integrated programs, including MEDKids.</li>
+        <li>Maintained data integrity across the <b>GCP stack</b> with cloud access-management protocols and encryption controls for production integrations.</li>
+        <li>Accelerated secure releases by wiring <b>SAST/DAST, container scanning &amp; IaC scanning</b> into CI/CD pipelines.</li>
+      </ul>
+    </article>
+
+    <article class="job past rv">
+      <div class="job-head">
+        <h3 class="job-title">Graduate Teaching Assistant</h3>
+        <span class="job-badge badge-closed">RESOLVED</span>
+      </div>
+      <p class="job-meta"><b>New Jersey Institute of Technology</b> · Newark, NJ · May 2023 — May 2024</p>
+      <ul>
+        <li>Taught <b>adversarial ML</b> — model poisoning &amp; evasion defenses — to 100+ students across 3 terms; the same threat-modeling instincts now hardening enterprise GenAI/Copilot deployments.</li>
+        <li>Instructed <b>privacy-preserving ML</b> and secure data-handling practices in Python.</li>
+      </ul>
+    </article>
+
+    <article class="job past rv">
+      <div class="job-head">
+        <h3 class="job-title">Application Security Intern</h3>
+        <span class="job-badge badge-closed">RESOLVED</span>
+      </div>
+      <p class="job-meta"><b>SPLIT</b> · Chennai, India · Jan 2022 — Jul 2022</p>
+      <ul>
+        <li>Improved reliability for <b>5,000+ users</b> by resolving front-end vulnerabilities — timestamp misconfigurations and React-DOM reload issues — in a React Native Android app.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="wrap">
+  <div class="sec-head rv">
+    <span class="sec-tag">LOG 02</span>
+    <h2 class="sec-title">Case Files</h2>
+  </div>
+  <p class="sec-sub rv">independent research — built, broken &amp; documented</p>
+
+  <div class="cases">
+    <article class="case rv">
+      <div class="case-top">
+        <span class="case-id">CF-001</span>
+        <span class="case-sev sev-def">DEFENSE</span>
+      </div>
+      <h3>LLM-Powered DNS Proxy for Spam URL Filtering</h3>
+      <p>Self-hosted DNS proxy that routes lookups through a <b>local LLM</b> to classify and block spam &amp; phishing domains in real time — zero traffic shipped to third-party filtering services. Privacy-preserving defense at the resolver layer.</p>
+      <div class="case-tools">local-llm · dns · python · self-hosted</div>
+      <a class="case-link" href="https://medium.com/@rudranilmaity01" target="_blank" rel="noopener">read the write-up</a>
+    </article>
+
+    <article class="case rv">
+      <div class="case-top">
+        <span class="case-id">CF-002</span>
+        <span class="case-sev sev-rec">RECON</span>
+      </div>
+      <h3>Network Traffic Analysis of 30+ Android Apps</h3>
+      <p>Static + dynamic traffic analysis with <b>MITMProxy, Frida &amp; Objection</b>, uncovering frequent PII transmission to ad and analytics servers — with documented mitigation strategies for each finding.</p>
+      <div class="case-tools">mitmproxy · frida · objection · android</div>
+      <a class="case-link" href="https://medium.com/@rudranilmaity01" target="_blank" rel="noopener">read the write-up</a>
+    </article>
+
+    <article class="case rv">
+      <div class="case-top">
+        <span class="case-id">CF-003</span>
+        <span class="case-sev sev-off">OFFENSE</span>
+      </div>
+      <h3>Buffer Overflow Attacks on x86 Programs</h3>
+      <p>Exploits bypassing <b>ASLR, DEP &amp; stack canaries</b> via ret2libc and ROP chains — GDB-driven runtime analysis and disassembly against C/x86 targets. Knowing the attack is half the defense.</p>
+      <div class="case-tools">gdb · rop · ret2libc · c/x86</div>
+      <a class="case-link" href="https://github.com/Pegasus-01" target="_blank" rel="noopener">view on github</a>
+    </article>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="wrap">
+  <div class="sec-head rv">
+    <span class="sec-tag">LOG 03</span>
+    <h2 class="sec-title">Control Matrix</h2>
+  </div>
+  <p class="sec-sub rv">deployed &amp; operational across the stack</p>
+
+  <div class="matrix">
+    <div class="ctrl rv">
+      <div class="ctrl-head"><span class="ctrl-num">AC-01</span><h3>Identity &amp; Access</h3></div>
+      <div class="tags"><span class="tag">Entra ID</span><span class="tag">Active Directory</span><span class="tag">Conditional Access</span><span class="tag">PIM</span><span class="tag">Zero Trust</span><span class="tag">SAML</span><span class="tag">OAuth 2.0</span><span class="tag">OIDC</span><span class="tag">Phishing-resistant MFA</span></div>
+    </div>
+    <div class="ctrl rv">
+      <div class="ctrl-head"><span class="ctrl-num">EP-02</span><h3>Endpoint &amp; MDM</h3></div>
+      <div class="tags"><span class="tag">EDR/XDR (Bitdefender)</span><span class="tag">Ivanti Neurons</span><span class="tag">Ivanti MDM</span><span class="tag">Windows</span><span class="tag">Linux</span><span class="tag">macOS</span></div>
+    </div>
+    <div class="ctrl rv">
+      <div class="ctrl-head"><span class="ctrl-num">DP-03</span><h3>SaaS Security &amp; DLP</h3></div>
+      <div class="tags"><span class="tag">Microsoft Purview</span><span class="tag">Zscaler DLP/CASB</span><span class="tag">Web Gateway</span><span class="tag">M365 / SharePoint / OneDrive</span><span class="tag">Smartsheet</span><span class="tag">GenAI/Copilot governance</span></div>
+    </div>
+    <div class="ctrl rv">
+      <div class="ctrl-head"><span class="ctrl-num">OP-04</span><h3>Security Operations</h3></div>
+      <div class="tags"><span class="tag">SIEM/SOAR</span><span class="tag">Incident Response</span><span class="tag">Threat Hunting</span><span class="tag">MITRE ATT&amp;CK</span><span class="tag">Nessus / Tenable</span><span class="tag">OSINT</span><span class="tag">SOC3 Investigations</span></div>
+    </div>
+    <div class="ctrl rv">
+      <div class="ctrl-head"><span class="ctrl-num">AU-05</span><h3>Automation &amp; Dev</h3></div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">PowerShell</span><span class="tag">Bash</span><span class="tag">SAST/DAST</span><span class="tag">CI/CD Security</span><span class="tag">IaC Scanning</span><span class="tag">Git</span></div>
+    </div>
+    <div class="ctrl rv">
+      <div class="ctrl-head"><span class="ctrl-num">GC-06</span><h3>Compliance, Cloud &amp; Net</h3></div>
+      <div class="tags"><span class="tag">PCI-DSS</span><span class="tag">HIPAA</span><span class="tag">NIST 800-53</span><span class="tag">OWASP Top 10 + GenAI Top 10</span><span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">FortiGate ACLs</span><span class="tag">SPF/DKIM/DMARC</span><span class="tag">VLAN</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION & CERTS ============ -->
+<section id="credentials" class="wrap">
+  <div class="sec-head rv">
+    <span class="sec-tag">LOG 04</span>
+    <h2 class="sec-title">Credentials</h2>
+  </div>
+  <p class="sec-sub rv">verified chain of trust</p>
+
+  <div class="edu-grid">
+    <div class="edu rv">
+      <h3>New Jersey Institute of Technology</h3>
+      <p class="deg">M.S. — Cyber Security &amp; Privacy</p>
+      <p class="meta">Newark, NJ · 2022 — 2024 · GPA 3.55</p>
+    </div>
+    <div class="edu rv">
+      <h3>Netaji Subhash Engineering College</h3>
+      <p class="deg">B.Tech — Computer Science &amp; Engineering</p>
+      <p class="meta">Kolkata, India · 2018 — 2022 · CGPA 8.44/10</p>
+    </div>
+  </div>
+
+  <div class="cert-row rv">
+    <span class="cert"><span class="cdot"></span>CompTIA Security+</span>
+    <span class="cert"><span class="cdot"></span>AWS Certified AI Practitioner</span>
+    <a class="cert hl" href="https://tryhackme.com/p/p3ga5u5" target="_blank" rel="noopener"><span class="cdot"></span>Top 2% — TryHackMe CTF</a>
+    <a class="cert" href="https://medium.com/@rudranilmaity01" target="_blank" rel="noopener"><span class="cdot"></span>Security Blog @ Medium</a>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="wrap contact">
+  <div class="contact-panel rv">
+    <span class="sec-tag">SECURE CHANNEL</span>
+    <h2>Escalate to a human</h2>
+    <p>Building a security team, hardening a GenAI deployment, or arguing about Conditional Access policy? I answer faster than my MTTR.</p>
+    <div class="contact-links">
+      <a class="chip primary" href="mailto:rudranilmaity01@gmail.com">rudranilmaity01@gmail.com</a>
+      <a class="chip" href="tel:+19739648869">973-964-8869</a>
+      <a class="chip" href="https://www.linkedin.com/in/rudranil01/" target="_blank" rel="noopener">linkedin</a>
+      <a class="chip" href="https://github.com/Pegasus-01" target="_blank" rel="noopener">github</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <span>© <span id="yr">2026</span> Rudranil Maity — Riviera Beach, FL</span>
+    <span>alias: <a href="https://tryhackme.com/p/p3ga5u5" target="_blank" rel="noopener">p3ga5u5</a> · handle: <a href="https://github.com/Pegasus-01" target="_blank" rel="noopener">Pegasus-01</a></span>
+    <span>uptime: monitored · posture: hardened</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- live UTC clock ---------- */
+const clockEl=document.getElementById('clock');
+function tick(){
+  const d=new Date();
+  const p=n=>String(n).padStart(2,'0');
+  clockEl.textContent=`${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())} UTC`;
+}
+tick();setInterval(tick,1000);
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ---------- hero triage console ---------- */
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const body=document.getElementById('termBody');
+const now=()=>{const d=new Date();const p=n=>String(n).padStart(2,'0');return `${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`};
+
+/* each line: [delay-before(ms), html] — html may use span classes */
+const script=[
+  [200 ,`<span class="t-time">[${now()}]</span> <span class="t-dim">soc-triage v3.2 — session opened</span>`],
+  [420 ,`<span class="t-time">[${now()}]</span> <span class="t-info">INFO </span> <span class="t-txt">inbound connection detected — classifying visitor…</span>`],
+  [520 ,`<span class="t-time">[${now()}]</span> <span class="t-info">INFO </span> <span class="t-txt">reputation check……………… <span class="t-ok">clean</span></span>`],
+  [430 ,`<span class="t-time">[${now()}]</span> <span class="t-warn">SCAN </span> <span class="t-txt">intent analysis…………………… <span class="t-ok">recruiter | engineer | curious</span></span>`],
+  [430 ,`<span class="t-time">[${now()}]</span> <span class="t-info">INFO </span> <span class="t-txt">threat score: <span class="t-ok">0.02</span> — proceeding</span>`],
+  [520 ,`<span class="t-time">[${now()}]</span> <span class="t-dim">────────────────────────────────</span>`],
+  [300 ,`<span class="t-time">[${now()}]</span> <span class="t-txt">loading profile: <span class="t-bright">rudranil.maity</span></span>`],
+  [430 ,`<span class="t-time">[${now()}]</span> <span class="t-txt">├─ role………… <span class="t-bright">security engineer, blue team</span></span>`],
+  [330 ,`<span class="t-time">[${now()}]</span> <span class="t-txt">├─ mttr………… <span class="t-ok">&lt; 2h sustained</span></span>`],
+  [330 ,`<span class="t-time">[${now()}]</span> <span class="t-txt">├─ alerts…… <span class="t-ok">-50% via copilot automation</span></span>`],
+  [330 ,`<span class="t-time">[${now()}]</span> <span class="t-txt">├─ phishing <span class="t-ok">15% → 4.9% in 90 days</span></span>`],
+  [330 ,`<span class="t-time">[${now()}]</span> <span class="t-txt">└─ ctf……………… <span class="t-warn">top 2% @ tryhackme (p3ga5u5)</span></span>`],
+  [560 ,`<span class="t-time">[${now()}]</span> <span class="t-txt">verdict: <span class="t-ok">hire-grade signal detected</span></span>`],
+  [500 ,`<span class="term-grant">▲ ACCESS GRANTED — SCROLL FOR EVIDENCE</span>`]
+];
+
+function typeLine(html,el,done){
+  /* type-on effect: reveal by characters of the text content while keeping markup */
+  el.innerHTML=html;
+  done();
+}
+function runConsole(){
+  if(reduce){ body.innerHTML=script.map(s=>`<div class="ln">${s[1]}</div>`).join(''); return; }
+  let i=0;
+  const cursor=document.createElement('div');
+  cursor.className='ln';
+  cursor.innerHTML='<span class="term-cursor"></span>';
+  body.appendChild(cursor);
+  function next(){
+    if(i>=script.length){ return; }
+    const [delay,html]=script[i++];
+    setTimeout(()=>{
+      const ln=document.createElement('div');
+      ln.className='ln';
+      ln.innerHTML=html;
+      body.insertBefore(ln,cursor);
+      body.scrollTop=body.scrollHeight;
+      next();
+    },delay);
+  }
+  next();
+}
+runConsole();
+
+/* ---------- scroll reveal ---------- */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+  });
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach((el,idx)=>{
+  el.style.transitionDelay=`${(idx%4)*70}ms`;
+  io.observe(el);
+});
+</script>
+</body>
+</html>
