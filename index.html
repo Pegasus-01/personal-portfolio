@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rudranil Maity — Security Engineer</title>
+<meta name="description" content="Rudranil Maity — security engineer across SOC operations, Zero Trust identity, and data protection in Azure and M365. Currently securing a PCI-DSS cardholder environment for 1,000+ users.">
+<meta name="author" content="Rudranil Maity">
+<meta name="theme-color" content="#0B0C0F">
+
+<!-- UPDATE to your live GitHub Pages URL -->
+<link rel="canonical" href="https://pegasus-01.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Rudranil Maity — Security Engineer">
+<meta property="og:description" content="SOC operations, Zero Trust identity, and data protection in Azure &amp; M365. Sub-2h MTTR in a PCI-DSS cardholder environment.">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23111318'/%3E%3Ctext x='50' y='68' font-family='system-ui,sans-serif' font-size='52' font-weight='600' fill='%237AA2F7' text-anchor='middle'%3ERM%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Rudranil Maity",
+  "jobTitle":"Security Engineer",
+  "email":"mailto:rudranilmaity01@gmail.com",
+  "telephone":"+1-973-964-8869",
+  "address":{"@type":"PostalAddress","addressLocality":"West Palm Beach","addressRegion":"FL","addressCountry":"US"},
+  "alumniOf":[
+    {"@type":"CollegeOrUniversity","name":"New Jersey Institute of Technology"},
+    {"@type":"CollegeOrUniversity","name":"Netaji Subhash Engineering College"}
+  ],
+  "worksFor":{"@type":"Organization","name":"The Breakers Palm Beach"},
+  "knowsAbout":["Security Operations","Zero Trust","Microsoft Entra ID","Microsoft Sentinel","Data Loss Prevention","Detection Engineering","PCI-DSS","HIPAA","GenAI Security"],
+  "sameAs":[
+    "https://www.linkedin.com/in/rudranil01/",
+    "https://github.com/Pegasus-01",
+    "https://medium.com/@rudranilmaity01",
+    "https://tryhackme.com/p/p3ga5u5"
+  ]
+}
+</script>
+
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --bg:#0B0C0F;
+  --surface:#111318;
+  --surface-2:#161920;
+  --line:#232730;
+  --line-2:#2E333F;
+  --text:#B4BCCA;
+  --bright:#EDF0F5;
+  --muted:#79828F;
+  --accent:#7AA2F7;
+  --accent-soft:rgba(122,162,247,.12);
+  --green:#7EE787;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --w:900px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:15.5px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* soft glow behind the top of the page */
+body::before{
+  content:"";position:fixed;top:-320px;left:50%;transform:translateX(-50%);
+  width:1100px;height:700px;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(122,162,247,.10),transparent 65%);
+}
+::selection{background:var(--accent);color:#0B0C0F}
+a{color:var(--accent);text-decoration:none;transition:color .16s}
+a:hover{color:var(--bright)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{color:var(--bright);line-height:1.25;font-weight:600;text-wrap:balance}
+strong{color:var(--bright);font-weight:600}
+
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--line-2);border:3px solid var(--bg);border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+.wrap{max-width:var(--w);margin:0 auto;padding-left:24px;padding-right:24px}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(11,12,15,.82);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;transition:border-color .25s;
+}
+header.stuck{border-bottom-color:var(--line)}
+.nav{
+  max-width:var(--w);margin:0 auto;padding:0 24px;height:62px;
+  display:flex;align-items:center;gap:24px;
+}
+.brand{color:var(--bright);font-weight:600;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{
+  color:var(--muted);font-size:14px;padding:7px 11px;border-radius:6px;
+  transition:color .16s,background .16s;
+}
+.nav-links a:hover{color:var(--bright);background:var(--surface)}
+.nav-links a.active{color:var(--accent)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+  background:var(--accent);color:#0B0C0F;font-weight:600;font-size:14px;
+  padding:8px 14px;border-radius:7px;transition:opacity .16s,transform .16s var(--ease);
+}
+.nav-cta:hover{opacity:.88;color:#0B0C0F;transform:translateY(-1px)}
+.nav-cta svg{width:14px;height:14px;fill:currentColor}
+@media(max-width:720px){
+  .nav-links{display:none}
+  .nav{gap:12px}
+  .nav-cta{margin-left:auto}
+}
+
+/* ---------- section shell ---------- */
+section{padding-top:76px}
+.sec-label{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+.sec-title{font-size:26px;letter-spacing:-.02em;margin-bottom:6px}
+.sec-note{color:var(--muted);font-size:14.5px;margin-bottom:32px}
+.rule{height:1px;background:var(--line);margin:0 0 32px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- hero ---------- */
+.hero{padding-top:64px;padding-bottom:4px}
+.status{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12px;color:var(--green);
+  background:rgba(126,231,135,.08);border:1px solid rgba(126,231,135,.22);
+  padding:5px 11px;border-radius:99px;margin-bottom:22px;
+}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1{font-size:clamp(34px,5.5vw,46px);letter-spacing:-.03em;font-weight:700;margin-bottom:10px}
+.hero-role{
+  font-size:clamp(17px,2.4vw,20px);color:var(--bright);font-weight:500;
+  letter-spacing:-.01em;margin-bottom:14px;
+}
+.hero-meta{
+  font-family:var(--mono);font-size:13px;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:22px;
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:7px}
+.hero-meta svg{width:13px;height:13px;fill:var(--muted);flex:none}
+.hero-p{max-width:64ch;margin-bottom:28px}
+.hero-p + .hero-p{margin-top:-14px}
+
+/* buttons */
+.btn-row{display:flex;flex-wrap:wrap;gap:9px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  font-family:inherit;font-size:14px;color:var(--text);
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  padding:9px 14px;transition:border-color .16s,color .16s,background .16s,transform .16s var(--ease);
+}
+.btn:hover{border-color:var(--line-2);color:var(--bright);background:var(--surface-2);transform:translateY(-1px)}
+.btn svg{width:15px;height:15px;fill:currentColor;flex:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#0B0C0F;font-weight:600}
+.btn.primary:hover{opacity:.88;background:var(--accent);color:#0B0C0F}
+
+/* ---------- metrics ---------- */
+.metrics{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;margin-top:44px;
+}
+.metric{background:var(--surface);padding:20px 18px;transition:background .2s}
+.metric:hover{background:var(--surface-2)}
+.metric b{
+  display:block;font-size:25px;font-weight:600;color:var(--bright);
+  letter-spacing:-.02em;line-height:1.2;font-variant-numeric:tabular-nums;
+}
+.metric span{display:block;font-size:13px;color:var(--muted);margin-top:5px;line-height:1.45}
+@media(max-width:720px){.metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){
+  .metric{padding:16px 14px}
+  .metric b{font-size:20px}
+  .metric span{font-size:12.5px}
+}
+@media(max-width:340px){.metrics{grid-template-columns:1fr}}
+
+/* ---------- entry rows (experience / education) ---------- */
+.entry{
+  display:grid;grid-template-columns:158px 1fr;gap:26px;
+  padding:24px 16px 24px 0;border-radius:10px;
+  transition:background .2s;
+}
+.entry:hover{background:rgba(255,255,255,.018)}
+.entry + .entry{border-top:1px solid var(--line)}
+.entry-when{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:3px;line-height:1.6}
+.entry-when em{display:block;font-style:normal;color:var(--line-2);font-size:11.5px;margin-top:3px}
+.entry-role{font-size:17.5px;font-weight:600;letter-spacing:-.015em;margin-bottom:2px}
+.entry-org{font-size:14.5px;color:var(--text);margin-bottom:14px}
+.entry-org b{color:var(--accent);font-weight:500}
+.entry-org .sep{color:var(--line-2);margin:0 7px}
+.badge{
+  display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  color:var(--green);background:rgba(126,231,135,.08);border:1px solid rgba(126,231,135,.22);
+  padding:1px 7px;border-radius:4px;margin-left:9px;vertical-align:2px;
+}
+.entry ul{list-style:none;display:grid;gap:9px}
+.entry li{position:relative;padding-left:18px;font-size:14.8px}
+.entry li::before{
+  content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;
+  border-radius:50%;background:var(--line-2);
+}
+.entry li strong{color:var(--bright)}
+@media(max-width:720px){
+  .entry{grid-template-columns:1fr;gap:12px;padding:22px 0}
+  .entry-when{padding-top:0}
+  .entry-when em{display:inline;margin:0 0 0 8px}
+}
+
+/* ---------- projects ---------- */
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.projects{grid-template-columns:1fr}}
+.card{
+  display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:24px;transition:border-color .2s,transform .2s var(--ease),background .2s;
+}
+.card:hover{border-color:var(--line-2);background:var(--surface-2);transform:translateY(-2px)}
+.card h3{font-size:17px;letter-spacing:-.015em;margin-bottom:10px}
+.card p{font-size:14.5px;flex:1}
+.card .result{
+  font-family:var(--mono);font-size:12.5px;color:var(--green);
+  background:rgba(126,231,135,.06);border-left:2px solid rgba(126,231,135,.4);
+  padding:9px 12px;border-radius:0 6px 6px 0;margin-top:16px;line-height:1.7;
+}
+.card .stack{
+  font-family:var(--mono);font-size:12px;color:var(--muted);
+  margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+}
+.card .more{margin-top:14px;font-size:14px;font-weight:500;align-self:flex-start}
+.card .more::after{content:" →";transition:opacity .2s}
+
+/* ---------- skills ---------- */
+.skill-row{
+  display:grid;grid-template-columns:158px 1fr;gap:26px;
+  padding:16px 0;align-items:start;
+}
+.skill-row + .skill-row{border-top:1px solid var(--line)}
+.skill-row h3{
+  font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--muted);
+  letter-spacing:.04em;text-transform:uppercase;padding-top:5px;
+}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{
+  font-size:13.5px;color:var(--text);background:var(--surface);
+  border:1px solid var(--line);border-radius:6px;padding:4px 10px;
+  transition:border-color .16s,color .16s;
+}
+.tag:hover{border-color:var(--accent);color:var(--bright)}
+@media(max-width:720px){
+  .skill-row{grid-template-columns:1fr;gap:10px}
+  .skill-row h3{padding-top:0}
+}
+
+/* ---------- certs ---------- */
+.certs{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+.cert{
+  display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--text);
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;
+  transition:border-color .16s,color .16s,transform .16s var(--ease);
+}
+a.cert:hover{border-color:var(--line-2);color:var(--bright);transform:translateY(-1px)}
+.cert i{width:6px;height:6px;border-radius:50%;background:var(--green);flex:none}
+.cert.pending i{background:var(--accent)}
+
+/* ---------- contact ---------- */
+.contact-box{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:40px 32px;text-align:center;
+}
+.contact-box h2{font-size:24px;letter-spacing:-.02em;margin-bottom:10px}
+.contact-box p{max-width:50ch;margin:0 auto 26px;color:var(--muted)}
+.contact-box .btn-row{justify-content:center}
+
+footer{
+  margin-top:80px;border-top:1px solid var(--line);padding:24px 0 40px;
+}
+.foot{
+  max-width:var(--w);margin:0 auto;padding:0 24px;
+  display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;
+  font-size:13px;color:var(--muted);
+}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:28px;z-index:99;transform:translate(-50%,16px);
+  background:var(--surface-2);border:1px solid var(--line-2);color:var(--bright);
+  font-size:13.5px;padding:11px 18px;border-radius:9px;
+  box-shadow:0 16px 40px -16px rgba(0,0,0,.8);
+  opacity:0;visibility:hidden;transition:.24s var(--ease);
+}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  .rv{opacity:1;transform:none}
+}
+@media print{
+  header,footer,.toast,.btn-row,.status{display:none}
+  body{background:#fff;color:#000;font-size:11pt}
+  h1,h2,h3,strong,.entry-role{color:#000}
+  .card,.metric,.tag,.cert{border-color:#ccc;background:#fff}
+  section{padding-top:20px}
+}
+</style>
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+
+<header id="header">
+  <nav class="nav">
+    <a class="brand" href="#top">Rudranil Maity</a>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="Rudranil_Maity_Resume.pdf" download>
+      <svg viewBox="0 0 24 24"><path d="M12 16 6 10h4V3h4v7h4l-6 6zM4 18h16v3H4z"/></svg>
+      Resume
+    </a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <div class="status"><i></i>Open to security engineering roles</div>
+
+  <h1>Rudranil Maity</h1>
+  <p class="hero-role">Security Engineer — SOC Operations, Zero Trust Identity &amp; Data Protection</p>
+
+  <div class="hero-meta">
+    <span>
+      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+      West Palm Beach, FL
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 9 8-5V6l-8 5-8-5v2z"/></svg>
+      rudranilmaity01@gmail.com
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/></svg>
+      973-964-8869
+    </span>
+  </div>
+
+  <p class="hero-p">
+    Security engineer working across <strong>SOC operations, Zero Trust identity, and data protection</strong>
+    in Azure and M365 environments. Currently securing a <strong>PCI-DSS cardholder environment</strong>
+    for 1,000+ users and managed endpoints — detection engineering, DLP, and the identity controls behind them.
+  </p>
+  <p class="hero-p">
+    Deployed <strong>inline prompt inspection across Copilot and Claude</strong> to stop PII, PHI, and cardholder
+    data leaving through AI tools, and automated detection and remediation workflows in Python and PowerShell.
+    MS in Cyber Security, NJIT.
+  </p>
+
+  <div class="btn-row">
+    <button class="btn primary" id="copyMail" type="button">
+      <svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/></svg>
+      Copy email
+    </button>
+    <a class="btn" href="https://www.linkedin.com/in/rudranil01/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4.4v14H.5zM8.9 8h4.2v1.9h.1c.6-1.1 2-2.3 4.2-2.3 4.5 0 5.3 3 5.3 6.8V22h-4.4v-6.6c0-1.6 0-3.6-2.2-3.6s-2.6 1.7-2.6 3.5V22H8.9z"/></svg>
+      LinkedIn
+    </a>
+    <a class="btn" href="https://github.com/Pegasus-01" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.35.78 1.05.78 2.12v3.14c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+      GitHub
+    </a>
+    <a class="btn" href="https://medium.com/@rudranilmaity01" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M6.8 5a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm10.1.8c1.9 0 3.4 2.8 3.4 6.2s-1.5 6.2-3.4 6.2-3.4-2.8-3.4-6.2 1.5-6.2 3.4-6.2zM22.8 6.4c.7 0 1.2 2.5 1.2 5.6s-.5 5.6-1.2 5.6-1.2-2.5-1.2-5.6.5-5.6 1.2-5.6z"/></svg>
+      Blog
+    </a>
+    <a class="btn" href="https://tryhackme.com/p/p3ga5u5" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5.2 3.8 10 9 11 5.2-1 9-5.8 9-11V6l-9-4zm0 4.5 5 2.2V12c0 3.4-2.3 6.6-5 7.6-2.7-1-5-4.2-5-7.6V8.7l5-2.2z"/></svg>
+      TryHackMe
+    </a>
+  </div>
+
+  <div class="metrics rv">
+    <div class="metric">
+      <b>&lt;2h</b>
+      <span>Sustained MTTR on daily alert triage</span>
+    </div>
+    <div class="metric">
+      <b>50%+</b>
+      <span>MXDR alert volume reduced</span>
+    </div>
+    <div class="metric">
+      <b>15% → 4.9%</b>
+      <span>Phishing-prone rate in 3 months</span>
+    </div>
+    <div class="metric">
+      <b>1,000+</b>
+      <span>Users &amp; endpoints under Zero Trust</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience" class="wrap">
+  <div class="rv">
+    <p class="sec-label">01 — Experience</p>
+    <h2 class="sec-title">Where I've worked</h2>
+    <p class="sec-note">Three roles across enterprise security operations, application security, and teaching.</p>
+    <div class="rule"></div>
+  </div>
+
+  <article class="entry rv">
+    <div class="entry-when">Apr 2025 — Present<em>Palm Beach, FL</em></div>
+    <div>
+      <h3 class="entry-role">IT Security Analyst <span class="badge">CURRENT</span></h3>
+      <p class="entry-org"><b>The Breakers Palm Beach</b><span class="sep">·</span>Luxury resort, PCI-DSS cardholder environment</p>
+      <ul>
+        <li>Sustained <strong>sub-2-hour MTTR</strong> across daily alert triage from Sentinel, Bitdefender EDR, email gateway, and network monitoring — running full log and packet-level investigations in a PCI-DSS cardholder environment that operates 24/7.</li>
+        <li>Reduced the vulnerability remediation backlog <strong>30% in 6 months</strong> by automating patch deployment and Nessus/Tenable reporting workflows in Python and PowerShell — replacing a manual reporting cycle that consumed ~5 hours weekly.</li>
+        <li>Hardened identity and device posture for <strong>1,000+ users</strong> and managed endpoints by enforcing Zero Trust through Entra ID Conditional Access, PIM governance, and application whitelisting — moving standing privileged assignments to just-in-time approval and eliminating persistent global admin access.</li>
+        <li>Led <strong>DLP strategy</strong> across Microsoft 365, SharePoint, OneDrive, and Smartsheet — deploying Purview DLP and Zscaler CASB across 150+ classifiers to protect PII, PHI, and cardholder data, remediating 120+ over-exposed external sharing links in 2 months, and reconciling coverage against FortiGate ACLs and Zscaler web gateway policy.</li>
+        <li>Built security controls for enterprise <strong>GenAI adoption</strong> — deployed inline prompt inspection across Copilot and Claude, authored the acceptable-use policy, and stood up monitoring that blocks PII, PHI, and cardholder data from leaving through AI prompts.</li>
+        <li>Cut MXDR alert volume <strong>50%+</strong> by identifying recurring Kerberos ticket-purge (klist) false positives and engineering suppression logic in Sentinel — removing 150+ weekly alerts from the triage queue without loss of detection coverage.</li>
+        <li>Cut the phishing-prone rate from <strong>15% to 4.9% in 3 months</strong> by onboarding KnowBe4 and running targeted awareness training for 800+ employees.</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="entry rv">
+    <div class="entry-when">Aug 2024 — Apr 2025<em>Chicago, IL</em></div>
+    <div>
+      <h3 class="entry-role">Information Security Analyst</h3>
+      <p class="entry-org"><b>Rebecca Everlene Trust Company</b><span class="sep">·</span>Nonprofit, twelve integrated health &amp; community programs</p>
+      <ul>
+        <li>Surfaced <strong>15+ critical vulnerabilities</strong> in production applications through OSINT-driven penetration testing combined with SAST and DAST — validated and remediated before release.</li>
+        <li>Established <strong>NIST/OWASP-aligned incident response plans</strong> and risk management frameworks across twelve programs including MEDKids, supporting clean HIPAA audit outcomes.</li>
+        <li>Integrated SAST, DAST, container scanning, and IaC scanning into <strong>CI/CD pipelines</strong>, catching security issues pre-release across GCP production environments.</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="entry rv">
+    <div class="entry-when">May 2023 — May 2024<em>Newark, NJ</em></div>
+    <div>
+      <h3 class="entry-role">Graduate Teaching Assistant</h3>
+      <p class="entry-org"><b>New Jersey Institute of Technology</b></p>
+      <ul>
+        <li>Taught <strong>adversarial ML</strong> and defenses against model poisoning and evasion attacks to <strong>100+ graduate students</strong> across 3 terms, plus privacy-preserving ML and secure data handling in Python.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="wrap">
+  <div class="rv">
+    <p class="sec-label">02 — Projects</p>
+    <h2 class="sec-title">Things I've built and broken</h2>
+    <p class="sec-note">Independent research, written up in full on my blog.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="projects">
+    <article class="card rv">
+      <h3>DNS Ad-Block Proxy: From LLM Classification to Deterministic Filtering</h3>
+      <p>
+        Prototyped an LLM-based (Ollama) real-time DNS classifier for ad and tracker domains,
+        then redesigned it around an indexed SQLite blocklist after finding LLM inference added
+        2–5 seconds of latency per uncached domain.
+      </p>
+      <div class="result">Rebuilt version resolves blocklist decisions in &lt;0.01ms — fully deterministic, auditable verdicts.</div>
+      <div class="stack">Ollama · DNS · SQLite · Python</div>
+      <a class="more" href="https://medium.com/@rudranilmaity01" target="_blank" rel="noopener">Read the write-up</a>
+    </article>
+
+    <article class="card rv">
+      <h3>Android Network Traffic Analysis</h3>
+      <p>
+        Instrumented Android applications with Frida and MITMProxy to intercept TLS traffic
+        and audit how third-party ad SDKs handle user data — bypassing certificate pinning
+        to see what the apps actually transmit.
+      </p>
+      <div class="result">Surfaced insecure transmission of device identifiers and location data across 10 Android apps.</div>
+      <div class="stack">Frida · MITMProxy · Android · TLS</div>
+      <a class="more" href="https://medium.com/@rudranilmaity01" target="_blank" rel="noopener">Read the write-up</a>
+    </article>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="wrap">
+  <div class="rv">
+    <p class="sec-label">03 — Skills</p>
+    <h2 class="sec-title">Tools &amp; platforms</h2>
+    <p class="sec-note">Deployed and operated in production, not just evaluated.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="rv">
+    <div class="skill-row">
+      <h3>Cloud &amp; Identity</h3>
+      <div class="tags">
+        <span class="tag">Azure</span><span class="tag">Entra ID</span><span class="tag">Conditional Access</span>
+        <span class="tag">PIM</span><span class="tag">Active Directory</span><span class="tag">AWS</span><span class="tag">GCP</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <h3>Detection &amp; Response</h3>
+      <div class="tags">
+        <span class="tag">Microsoft Sentinel</span><span class="tag">MS Defender XDR</span><span class="tag">Bitdefender EDR</span>
+        <span class="tag">Incident Response</span><span class="tag">Threat Hunting</span><span class="tag">MITRE ATT&amp;CK</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <h3>Data Protection</h3>
+      <div class="tags">
+        <span class="tag">Microsoft Purview DLP</span><span class="tag">Zscaler CASB</span>
+        <span class="tag">GenAI/Copilot prompt inspection</span><span class="tag">Encryption</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <h3>Offensive &amp; VM</h3>
+      <div class="tags">
+        <span class="tag">Nessus / Tenable</span><span class="tag">Burp Suite</span><span class="tag">Metasploit</span>
+        <span class="tag">Wireshark</span><span class="tag">OSINT</span><span class="tag">SAST / DAST</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <h3>Compliance</h3>
+      <div class="tags">
+        <span class="tag">PCI-DSS</span><span class="tag">HIPAA</span><span class="tag">NIST 800-53</span><span class="tag">OWASP</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <h3>Automation</h3>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">PowerShell</span><span class="tag">SQLite</span>
+        <span class="tag">CI/CD security integration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education" class="wrap">
+  <div class="rv">
+    <p class="sec-label">04 — Education &amp; Certifications</p>
+    <h2 class="sec-title">Credentials</h2>
+    <div class="rule"></div>
+  </div>
+
+  <article class="entry rv">
+    <div class="entry-when">May 2024<em>Newark, NJ</em></div>
+    <div>
+      <h3 class="entry-role">M.S. — Cyber Security and Privacy</h3>
+      <p class="entry-org"><b>New Jersey Institute of Technology</b><span class="sep">·</span>GPA 3.55</p>
+    </div>
+  </article>
+
+  <article class="entry rv">
+    <div class="entry-when">July 2022<em>Kolkata, India</em></div>
+    <div>
+      <h3 class="entry-role">B.Tech — Computer Science</h3>
+      <p class="entry-org"><b>Netaji Subhash Engineering College</b><span class="sep">·</span>CGPA 8.44 / 10</p>
+    </div>
+  </article>
+
+  <div class="certs rv">
+    <span class="cert"><i></i>CompTIA Security+</span>
+    <span class="cert"><i></i>AWS Certified AI Practitioner</span>
+    <span class="cert pending"><i></i>SC-200 — in progress</span>
+    <a class="cert" href="https://tryhackme.com/p/p3ga5u5" target="_blank" rel="noopener"><i></i>TryHackMe — Top 2%</a>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="wrap">
+  <div class="contact-box rv">
+    <h2>Let's talk</h2>
+    <p>Hiring for a security role, or want to compare notes on keeping data out of AI prompts? I reply quickly.</p>
+    <div class="btn-row">
+      <a class="btn primary" href="mailto:rudranilmaity01@gmail.com">rudranilmaity01@gmail.com</a>
+      <a class="btn" href="tel:+19739648869">973-964-8869</a>
+      <a class="btn" href="https://www.linkedin.com/in/rudranil01/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="Rudranil_Maity_Resume.pdf" download>Download resume</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <span>© <span id="yr">2026</span> Rudranil Maity</span>
+    <span>West Palm Beach, FL</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var $ = function(s){ return document.querySelector(s); };
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* header border + active nav link */
+var header = $('#header');
+var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+var ids = ['experience','projects','skills','education','contact'];
+var ticking = false;
+
+function onScroll(){
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(function(){
+    header.classList.toggle('stuck', window.scrollY > 8);
+    var active = '';
+    for (var i = 0; i < ids.length; i++){
+      var el = document.getElementById(ids[i]);
+      if (el && el.getBoundingClientRect().top <= 140) active = ids[i];
+    }
+    links.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + active);
+    });
+    ticking = false;
+  });
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* scroll reveal */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    io.unobserve(e.target);
+  });
+}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+/* copy email */
+var MAIL = 'rudranilmaity01@gmail.com';
+var toastEl = $('#toast'), toastT;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200);
+}
+function fallbackCopy(){
+  try{
+    var ta = document.createElement('textarea');
+    ta.value = MAIL;
+    ta.setAttribute('readonly','');
+    ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    var done = document.execCommand('copy');
+    ta.parentNode.removeChild(ta);
+    toast(done ? 'Copied — ' + MAIL : MAIL);
+  } catch(e){ toast(MAIL); }
+}
+$('#copyMail').addEventListener('click', function(){
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(MAIL)
+      .then(function(){ toast('Copied — ' + MAIL); })
+      .catch(fallbackCopy);
+  } else fallbackCopy();
+});
+})();
+</script>
+</body>
+</html>
